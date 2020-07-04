@@ -48,7 +48,7 @@ func (p *page) typ() string {
 	return fmt.Sprintf("unknown<%02x>", p.flags)
 }
 
-// meta returns a pointer to the metadata section of the page.
+// meta returns a pointer to the metadata section of the page.、
 func (p *page) meta() *meta {
 	return (*meta)(unsafeAdd(unsafe.Pointer(p), unsafe.Sizeof(*p)))
 }

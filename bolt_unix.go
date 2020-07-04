@@ -9,6 +9,7 @@ import (
 	"unsafe"
 )
 
+// 尝试获取文件锁
 // flock acquires an advisory lock on a file descriptor.
 func flock(db *DB, exclusive bool, timeout time.Duration) error {
 	var t time.Time
@@ -42,6 +43,7 @@ func flock(db *DB, exclusive bool, timeout time.Duration) error {
 }
 
 // funlock releases an advisory lock on a file descriptor.
+// 释放文件锁
 func funlock(db *DB) error {
 	return syscall.Flock(int(db.file.Fd()), syscall.LOCK_UN)
 }
@@ -69,6 +71,7 @@ func mmap(db *DB, sz int) error {
 }
 
 // munmap unmaps a DB's data file from memory.
+// 解除文件的内存映射
 func munmap(db *DB) error {
 	// Ignore the unmap if we have no mapped data.
 	if db.dataref == nil {
